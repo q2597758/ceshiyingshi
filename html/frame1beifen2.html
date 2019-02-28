@@ -1,0 +1,252 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+<link rel="stylesheet" type="text/css" href="../css/base.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+<link rel="stylesheet" type="text/css" href="../css/auislide.css" />
+<link rel="stylesheet" href="../css/zhibo.css">
+<title>title</title>
+</head>
+<body>
+	<div class="logo">
+
+		<div class="zbText">
+			<h3>共享影视</h3>
+			<p class="text">电影、电视、直播,汇聚各类节目</p>
+		</div>
+	</div>
+
+<li>
+<div class="weui-grid js_grid" onclick="vList()">
+<center>
+<img class="zhiboImg" src="../image/zhibo/video.png" >
+</center>
+<p class="text">最新电影</p>
+</div>
+</li>
+
+<li>
+<div class="weui-grid js_grid" onclick="tvList()">
+<center>
+<img class="zhiboImg" src="../image/zhibo/tv.png" >
+</center>
+<p class="text">电视直播</p>
+</div>
+</li>
+
+<li>
+<div class="weui-grid js_grid" onclick="gameList()">
+<center>
+<img class="zhiboImg" src="../image/zhibo/game.png" >
+</center>
+<p class="text">游戏直播</p>
+</div>
+</li>
+
+<li>
+<div class="weui-grid js_grid" onclick="mnList()">
+<center>
+<img class="zhiboImg" src="../image/zhibo/mnvideo.png" >
+</center>
+<p class="text">美女视频</p>
+</div>
+</li>
+
+<li>
+<div class="weui-grid js_grid" onclick="openWin('zhibo_win')">
+<center>
+<img class="zhiboImg" src="../image/zhibo/zhibo.png" >
+</center>
+<p class="text">直播盒子</p>
+</div>
+</li>
+
+<li>
+<div class="weui-grid js_grid" onclick="List()">
+<center>
+<img class="zhiboImg" src="../image/zhibo/daixu.png" >
+</center>
+<p class="text">待更新</p>
+</div>
+</li>
+
+</body>
+
+<script type="text/javascript">
+
+  function vList(){
+  var delay = 0;
+  if(api.systemType != 'ios'){
+      delay = 300;
+  }
+  api.openWin({
+      name: 'v_list_win',
+      url: 'v_list_win.html',
+      bounces:false,
+      delay: delay,
+      slidBackEnabled:true,
+      vScrollBarEnabled:false,
+  });
+}
+
+function tvList(){
+  var delay = 0;
+  if(api.systemType != 'ios'){
+      delay = 300;
+  }
+  api.openWin({
+      name: 'tv_list_win',
+      url: 'tv_list_win.html',
+      bounces:false,
+      delay: delay,
+      slidBackEnabled:true,
+      vScrollBarEnabled:false,
+  });
+}
+
+function mnList(){
+	var delay = 0;
+	if(api.systemType != 'ios'){
+			delay = 300;
+	}
+	api.openWin({
+			name: 'v_mn_win',
+			url: 'v_mn_win.html',
+			bounces:false,
+			delay: delay,
+			slidBackEnabled:true,
+			vScrollBarEnabled:false,
+	});
+}
+
+function zhiboList(){
+	var delay = 0;
+	if(api.systemType != 'ios'){
+			delay = 300;
+	}
+	api.openWin({
+			name: 'zhibo_win',
+			url: 'zhibo_win.html',
+			bounces:false,
+			delay: delay,
+			slidBackEnabled:true,
+			vScrollBarEnabled:false,
+	});
+}
+
+function gameList(){
+	var delay = 0;
+	if(api.systemType != 'ios'){
+			delay = 300;
+	}
+	api.openWin({
+			name: 'game_list_win',
+			url: 'game_list_win.html',
+			bounces:false,
+			delay: delay,
+			slidBackEnabled:true,
+			vScrollBarEnabled:false,
+	});
+}
+
+  function openWin(name){
+      var time = localStorage.getItem('user_time');
+      var user_id = localStorage.getItem('user_id');
+      var username = localStorage.getItem('user_name');
+      var timestamp = Date.parse(new Date())/1000;
+      if(user_id==0){
+        api.alert({
+            title: '温馨提示',
+            msg: '请先登陆后使用',
+        });
+        api.openWin({
+            name: 'login',
+            url: 'login.html',
+            delay: 300
+        });
+        return;
+
+      }
+
+      if (time>timestamp) {
+
+
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+        api.openWin({
+            name: ''+name+'',
+            url: ''+name+'.html',
+            delay: 800,
+            bgColor: '#000000'
+        });
+
+      }else if (time<timestamp){
+        var dialogBox = api.require('dialogBox');
+        dialogBox.alert({
+            texts: {
+                content: '您的VIP会员已过期，请及时续费！',
+                leftBtnTitle: '在想想',
+                rightBtnTitle: '去开通'
+            },
+            styles: {
+                bg: '#fff',
+                w: 300,
+                content: {
+                    color: '#000',
+                    size: 14
+                },
+                left: {
+                    marginB: 7,
+                    marginL: 20,
+                    w: 130,
+                    h: 35,
+                    corner: 2,
+                    bg: '#ff7600',
+                    color: '#fff',
+                    size: 14
+                },
+                right: {
+                    marginB: 7,
+                    marginL: 10,
+                    w: 130,
+                    h: 35,
+                    corner: 2,
+                    bg: '#ff7600',
+                    color: '#fff',
+                    size: 14
+                }
+            }
+        }, function(ret) {
+            if (ret.eventType == 'left') {
+                var dialogBox = api.require('dialogBox');
+                dialogBox.close({
+                    dialogName: 'alert'
+                });
+            }else if (ret.eventType == 'right') {
+              api.openWin({
+                  name: 'open_vip_win',
+                  url: './open_vip_win.html',
+                  delay: 300
+              });
+              var dialogBox = api.require('dialogBox');
+              dialogBox.close({
+                  dialogName: 'alert'
+              });
+            }
+        });
+      }
+
+    }
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+</head>
+<body>
+  <header class="aui-bar aui-bar-nav" id="aui-header" style="background: linear-gradient(90deg, #FA7C54 0%, #FD3F69 100%); font-size:16px">
+      <a class="aui-btn aui-pull-left"  tapmode onclick="closeWin() "style="color:#FFF">
+          <span class="aui-iconfont aui-icon-left" style="color:#FFF"> </span>返回
+      </a>
+
+      <div id="title" class="aui-title" style="color:#FFF">千月影视4.0</div>
+  <!--    <a id="play" class="aui-btn aui-pull-right" style="color:#fff000 !important;font-weight:bold" tapmode onclick="huanxian()">
+           点此播放
+      </a>
+-->      <a class="aui-btn aui-pull-right" tapmode onclick="closeWd()"style="color:#FFF" >
+          关闭
+      </a>
+
+  </header>
+
+</body>
+
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript">
+    var dataurl = '';
+    var dataurl2 = '';
+    var qiyiurl = '';
+    var dcode = 1;
+    var onoff = true;
+    var jx_url1 = localStorage.getItem('jx_url1');
+    var jx_url2 = localStorage.getItem('jx_url2');
+
+    apiready = function(){
+      var api_url = localStorage.getItem('api_url');
+
+      api.parseTapmode();
+      var header = $api.byId('aui-header');
+      $api.fixStatusBar(header);
+      var headerPos = $api.offset(header);
+      var body_h = $api.offset($api.dom('body')).h;
+
+/*
+      var user_id = localStorage.getItem('user_id');
+      if (user_id>1) {
+
+        api.ajax({
+            url: api_url+'/login/login/imei.html',
+            method: 'get',
+            data: {
+                values: {
+                    uid: user_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+              localStorage.setItem('jx_url1',ret.msg.url1);
+              localStorage.setItem('jx_url2',ret.msg.url2);
+              localStorage.setItem('jx_url3',ret.msg.url3);
+              localStorage.setItem('jx_url4',ret.msg.url4);
+              localStorage.setItem('jx_url5',ret.msg.url5);
+              localStorage.setItem('jx_url6',ret.msg.url6);
+
+                if (ret.msg.imei!=api.deviceId) {
+                  localStorage.setItem('user_id','');
+                  localStorage.setItem('user_name','');
+                  localStorage.setItem('user_time','');
+                  api.sendEvent({
+                    name: 'newLoingdata',
+                    extra: {
+                    }
+                  });
+
+                  api.closeWin({
+                  });
+
+                  api.alert({
+                      title: '您已在其他设备登陆！账号已强制下线',
+                      msg: '请重新登陆',
+                  });
+                  return;
+
+
+
+
+
+                }
+            } else {
+
+
+
+            }
+        });
+      }
+
+*/
+
+      api.addEventListener({
+          name: 'keyback'
+      }, function(ret, err) {
+        api.hideProgress();
+        api.setScreenOrientation({
+            orientation: 'portrait_up'
+        });
+        var browser = api.require('webBrowser');
+        browser.historyBack(
+          function(ret, err) {
+              if (!ret.status) {
+                  api.closeWin();
+              }
+          }
+        );
+      });
+
+
+      var browser = api.require('webBrowser');
+      browser.openView({
+          url: api.pageParam.url,
+          rect: {
+              x: 0,
+              y: headerPos.h,
+              w: 'auto',
+              h: 'auto'
+          },
+          progress:{//设置进度条类型和样式
+  color:'rgba(0,0,0,0)'    //背景色 设置透明
+}
+      }, function(ret, err) {
+        // api.alert({
+        //     msg: JSON.stringify(ret)
+        // });
+          switch (ret.state) {
+              case 0:
+
+               dataurl = ret.url;
+               dataurl2 = dataurl;
+
+
+             var bturl = dataurl2.split(":");
+             var feurl = bturl[1];
+
+
+
+             //alert(dataurl2);
+                  break;
+              case 1:
+                  break;
+              case 2:
+                  break;
+              case 3:
+              var title = $api.byId('title');
+              title.innerHTML = ret.title;
+              break;
+              case 4:
+                  break;
+              default:
+              var title = $api.byId('title');
+              title.innerHTML = ret.title;
+                  break;
+          };
+
+      });
+
+      // api.openFrame({
+      //     name: 'zhedang',
+      //     url: 'zhedang.html',
+      //     bounces: true,
+      //     rect: {
+      //         x: 0,
+      //         y: headerPos.h,
+      //         w: api.winWidth,
+      //         h: 290
+      //     },
+
+      //     pageParam:{id:api.pageParam.id}
+      // });
+
+
+/*
+      var dialogBox = api.require('dialogBox');
+      dialogBox.taskPlan({
+          rect: {
+              w: 300,
+              h: 350
+          },
+          texts: {
+              mainTitle: '如何播放视频？',
+              subTitle: '找到你要观看的电影或者电视剧，打开播放页面，然后在播放页面点击右上角的【点击播放】即可。如果视频无法播放，请点击右上角的【更换线路】进行解决。',
+              content: [{
+                  text: '步骤1.打开你要观看的视频页面'
+              }, {
+                  text: '步骤2.点击右上角的【点击播放】'
+              }],
+              btnTitle: '点此关闭提示'
+          },
+          styles: {
+              bg: '#fff',
+              corner: 5,
+              main: {
+                  marginT: 10,
+                  color: '#FF3366',
+                  size: 16,
+                  bold: true,
+              },
+              sub: {
+                  marginT: 8,
+                  color: '#999999',
+                  size: 16,
+              },
+              content: [{
+                  bg: '#FF3366',
+                  marginT: 10,
+                  w: 280,
+                  h: 30,
+                  align: 'center',
+                  color: '#FFF',
+                  size: 14
+              }, {
+                  bg: '#FF3366',
+                  marginT: 10,
+                  w: 280,
+                  h: 30,
+                  align: 'center',
+                  color: '#FFF',
+                  size: 14
+              }],
+              ok: {
+                  marginB: 10,
+                  marginL: 20,
+                  w: 280,
+                  h: 40,
+                  bg: '#fff',
+                  color: '#FF3366',
+                  size: 15
+              }
+          }
+      }, function(ret) {
+          //alert(JSON.stringify(ret));
+          if (ret.eventType == 'ok') {
+              var dialogBox = api.require('dialogBox');
+              dialogBox.close({
+                  dialogName: 'taskPlan'
+              });
+          }
+      });
+
+*/
+
+
+    }
+
+
+
+    function getCaption(obj){
+      var index=obj.lastIndexOf("\=");
+      obj=obj.substring(index+1,obj.length);
+      return obj;
+    }
+
+
+
+
+    function getParam(name) {
+
+        return dataurl2.match(new RegExp('[?&]' + name + '=([^?&]+)', 'i')) ? decodeURIComponent(RegExp.$1) : '';
+
+    }
+
+    function closeWin(){
+      var browser = api.require('webBrowser');
+      browser.historyBack(
+        function(ret, err) {
+            if (!ret.status) {
+                api.closeWin();
+            }
+        }
+      );
+    }
+
+    function closeWd(){
+      api.closeWin();
+    }
+
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+    <style type="text/css">
+     html,body{background-color:#f5f6f4 ;background-size:100% 100%;  }
+        .text-white {
+            color: #f4f4f4 !important;
+        }
+        .aui-grid [class*=aui-col-] {
+            padding: 0.75rem 0;
+        }
+        .iconfont{
+          font-size: 1.5rem
+        }
+		#user_bg{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  min-width: 1000px;
+  z-index:-10;
+  zoom: 1;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+}
+    </style>
+</head>
+<body>
+    <!-- 顶部 -->
+
+
+
+    <div class="aui-me-content-box"  onClick="toLogin()">
+    			<div class="aui-me-content-info"></div>
+    			<div class="aui-me-content-list">
+    				<div class="aui-me-content-item">
+    					<div class="aui-me-content-item-head">
+    						<div class="aui-me-content-item-img">
+    							<img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAHgAA/+4ADkFkb2JlAGTAAAAAAf/bAIQAEAsLCwwLEAwMEBcPDQ8XGxQQEBQbHxcXFxcXHx4XGhoaGhceHiMlJyUjHi8vMzMvL0BAQEBAQEBAQEBAQEBAQAERDw8RExEVEhIVFBEUERQaFBYWFBomGhocGhomMCMeHh4eIzArLicnJy4rNTUwMDU1QEA/QEBAQEBAQEBAQEBA/8AAEQgAyADIAwEiAAIRAQMRAf/EAKMAAQACAwEBAAAAAAAAAAAAAAABAwIEBQYHAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUGEAABAwIEAgcEBggHAQAAAAABAAIDEQQhMRIFQQZRYXGBIjITkdFSFKGxwUJicoKSsiMzQ1MWosLS4oMkFZMRAAICAQIEBAMGBgMAAAAAAAABEQIDMQQhQVEScSITBWGBkaGxwdEyUuHxQmJyFIIzQ//aAAwDAQACEQMRAD8A4aIi4z6wIiIAiIgCIiAIiIAiLYtYNZ1vHhGQ6SobhSQ2UmN7WhxaQ05FYrq8KcFry2jHYx+E9HBVV+pCt1NJFL2OYdLhQqFcsEREAREQBERAEREAREQBERAEREAREQBERAERZRRukeGt7z0BCDO3gMrscGDM/YugAAKDADIKGMaxoa0UAUrG1pZRuQiIoBi9jXt0uFQtKe2dF4m+JnTxHat9FKs0E4OUi257T78Q7W+5ai1TT0LpyERFJIREQBERAEREAREQBERAEREAREQAAuIAxJyC6MEIiZTNx8xVVpDpHqOGJ8vYtlZXtPApZ8giIqkBERAEREAWvcWwfV7MH8R0q8uANCQCcgpRNriJOUQQaHMIt+S0fdSxxW7C+5kNGsb97pJ7F0H8mbu2H1AYnvAr6QcdXZUii3qnZSkyL58VGle9aN8mzgIspI3xvdHI0sew0c1woQRwKxQ0CIiEhERAEREAREQBERAFbbxeq/HytxPuVS6MMfpxhvHN3aq3cLxIbhFiJUDPBYmSMZvaO8LIoZIqzcQDORvtUfNW/wDUakPoC1FV81b/ANQKfmbf+o32pD6AsRYCeE5SN9qyD2HJwPegMJ4hKyn3hi09a0A+RmAcW04VXTWleR6Xh4ydn2q9HyZK6Hb5MlY7dZPWNZTCRET1OBdTuXuF8nhmlt5WzQPMcrDVr25grqv5s3x0Xp+u1uFC9rAHe1dOPIq1ho8/ebHJly99HWGkmrcoMeaXRHfbn0shoD6fGGjUuSpc5znFziXOcauccSSeJULNuW31PQxU7MdKTPZVVnwCIiguEREAREQBERAEREB1Nh2R+7zvHqelDCAXvAqanIBeoZybto/iyzynrfpH+ELU5Ec30Ltn3g9hPYQvVrfHSrqm1LPE326zVz2pWzpWsQl4HIj5V2JmdtrPS9znfar2bFs8flsoe9oP1roItO2vRHE8+V65Lv8A5M1m7dt7fLbQj/jb7lmLS1GUMY/Qb7lapUwivfb9z+pT8rbf0Wfqj3KDZWZzgjP6Dfcr0SCO63V/U1HbXtr/ADWkJ/42+5UP5e2STzWUXcNP1UXSRRC6IssuRaXuvCzOLJylsj/LC6P8j3D7Vp3PJVo9hEFzKw5tDyHtr9BXplCh0o+SNK7vcV0yX+bn7z5TdW8tpcSW0wpJE4td0VCqXV5ocx2+3WjIaAfzBoquUuZqG10Z9Diu746XfB2orP5hERQaBERAEREAREQBERAEREB0th3c7Te+s4F0Eg0TNGdMwR1heol522lv8Nk0h6mhv7RC8dttk7cL2Kza8RmUkayKgUBdl3L1DuUtnsLd1zuNzI6KMVe7BjfoqVrj74iuh5u9rs1kVszsr9uleaMZOe4/5Vm49bngfUCtd/PV4fJaxj8znH6qLRl3nleA6bTa3XAH35nlte6rlUOZNtGWyW9Pzf7Vp6eZ80ji/wBj25aYb28X/E3Xc77sfLFC3ucf8ywPOe9cPRH6B/1KqPfeWpvDdbR6QOb4XVp3eFb8PLuy7vCZ9mvHNLfNFINWkng4Gjgq2plXOTfFufbrOHj7P8qyan95b38UX/z/ANyyHOm8jMQn9A/6lfHyNfF9JLmJrOJaHE+w0WF1a8p7M8xXckl9dN80TDgD+LTQD2qFXK+ppkze20U9tbf41/kG88bmPNBC79Yfarmc93H8yzYfyvI+sFcx/MWyNNLfZYi3pkdU/slYjmPanH95skFPwuof2Vf0s37kcr3Xt7/8LfLh+J3o+erU/wAW1kb1tc13uVs/O+3CBzreOR89PAxzQ1tet1clx7S65P3GVsMttJYSPNGu1nRU/iqad4W9fckwsjfLa3LmhjS7RI0OyFfM2ihrKuhaj9tu1/2U+D0/E8pLLJNK+aU6pJHF73dJJqVigxFUXOe2kkoXIIiAEmgQBFmY6CoNVggTTCIiEhFOh+j1KHRXTq4aqVojGPkdoYC5xqaDqFShEohFMbHyPbHGC57jRrRxKzbbzO0lrCQ8OLT0hnmPYEDaWrRWrI4tXiOQ4dKhkZd4jlwHSrTVwAGPR19XapSKWtyRZa3ElndR3kHnhdUVypkWntC9Dzxdevs1lJEf3M8gef1CRVeZL2sPXx6V2YQd45Ym2+PxXdg71oWcXR9XtI9i2w2i0dTzfc8LtiWRL9HBv+1nk1Y2EmMv48B1KtoJIAFT0LeAoAPoXYjwTRXe5KfI3f4gw0a6OQSDgWgVx71wngteQRTqXotgZ/5u2Xm8zDS+Vht7IHN7neZw7FW7Sq2y+Klr5K1rrZwesh5isb+S5tLNzvXjY8xuIo15aM296+YFznEucaucauJzJOa7Gz3gsNyt7lxoxjqSH8DvC76CqeYNsftu4yMArbTEy2zx5XMdjgeqqywX7pnU7fcdqsFqdsulq6vrzOa0FzgBmVnLH6bqZg5FZ2zTqLqYZVVk7SY8BWmK3PONQ5L6Fum8S2fLdpQ/9q7hYwE8BoGty8Nt9jNuF5FZwir5XAHqb95x7Au5zRdRzbi22hNYLKMQsplUeb3LHPaK/E7/AG3D6udSprXzW+Rx0RACcsVxH0wAJwCuaGtwxr0qYoqwmR5LWkkNoKudpzp2dKumsZmlzWuBDNAdXA0kFQSpgytdTEwajn8B7elYrOSJ8cj4z4ixxaS3EVbnisY2GR7Y24ueQ0AY4k0UGiiJWhCLbNh++fbRyepcMrVgadNR90OPHuoimGV9SnXlOnLr4FzL3bxAyJ8BJjqQaA+J1NR8R7vYq7S7tITIZIa6wWCmPhOdanM4LSRJZX0qw1NvNr5jbmuLYyF1s0xAjRkKhp81KHOmCj1dTHGpDSBHTKkTcmjtOJWsxuo9QzKsIJIxoBjgkh1quE6dTMgnMZKXaWiuQ4932rFsrceA4BVPeXnq4BJCq2+PBEOdqJPSrbO8uLG5Zc2ztMjPYRxaeoqnjnTrXYdypvYAcyFsjSKhzJGkEHtoiTen2E5L4qrtyWrVWURd8H9SZrbZt6l+Zglbt187GW3lwhkd8TH8E/tndT5RE5nxiVmn61DOU99fgYGtH4nt+wlbtvyPfup688cTeIbV5/yhdFM2VKO2fsPGz7LZdztXcKi/avP9xpjZdnsH+vu122dwx+StjrLj0OdwWnuu6S7lM0lght4Rot4G+VjfevVwcj7YwfvpJZT1EMHsAU3PJO2PjIt3yQycCXa294Ki/qX1jwL7W+x29pTve2ne68EeGXWst1tZbMbXvEZmsx/Blb/FgP4epblnyZuEl0Y7stht2HGVpDi8fgHvXbHJmyhtCJSfi1mv1LOlbpyuHidW63WzvX08j9RPj5OMfM803loPBftd5DeRuyq4RyDqLSh5ZvAD85LBaxfee+Vpp2Bq7VzyLauq61uXxngHgPHtGkrmz8lbsw1idFN0eItP+ILf1sqX6Uzza7TZXtK3Dqulqw/qUC+2/Z7d9tsxM11KNM24PFMPhibwXG7cV1jyrvoNPlq9Ye2n1qu72DcLCD5i9a2NlQ1rdYLnE9Aaue7vZzZM9bbra4aqmK9G7f3J2sznNoXYio40VmmjSAc+KkNABpgsJHGpbwVTpnufAvhumxuja9uqKInLzUOLgOGKsi3GjmmQEl0rp53Z6n0pHTqbmtFElkPFR6o60O5+pKIxEA3USKkABuktpl196qur2Bl9FJAzwW5zFKE/e0+3Bc5E7mVWCicr9sQbttestXh+p1wAKBrvCAONc6mmARaSJL0LelXu7v6uv8NAiIoNCQcmk0bmVlrbWlPDkOlYIhDSY44ZIiISF7XlXdZBbwWN5gJAfk5ScHhpoYyfib9S8UvW8sQ2257RPt1x5oZNcbmmj2Fwq17T1EK+Oe7gce/rV4POvKrKWtazwlHrlK4kW5XW2Ut95qYhhFftBLHjh6oHlcuvDPDOwSQvbIw5OYQ4fQuhNP8AI8K+O1eOtXpZfpfzM1KhcrdOY9t25pa6QTXAGEMZq6v4jk3vRtLiyKUvd9tKuzfJHWReKsudrsXRN7G02rz5Yx4ox1fEvV2e42V8zXazNlHEA+IdrTiFFb1tozXNtc2GO+vB81xX1NpFC1b3c7GxbqupmsJ8rM3uPQ1oxKsYqrs4qm2+SL5ZGxML3ENa0EuccAAOJXheY72W+minNRZkO+Vac3NaaOkI/EcupehMN9vcgN0x1ptbSHNgdhLPTL1KeVvUvN82ztfuzoI6CO3jZGAMhhqoPassj8vwPQ2GNLOlwtftbtzVV+Zx3PBwbxxqsM8SiLA9pKAiIhIREQBERAFBNBVSsXnCiEMxace1WKpWoRUIiIWC63LG4iw3Vms0hnHpSHgK+U+1clEThp9CmSiyUtS2llB9ac1r2lrgHNOBBxBXLl5b2t7zJE19q85ut3uj+gYLU5W3wX1uLO4d/wBuEUBOcjBx7RxXoF1KLJPU+cusu3yWpNqtdNGupyDy1avwnubqZvwPmdT6KKZuV9kljEfywjpk9hLXe3j3rronbXoiP9jNKayWUdHH3HnY+Sdqa/U98r2/AXAD2gVW67lnZSwNbbiIt8skbnMf+sDVdVE7K9ETbdZ7ROS/D4wcf+24PL85eaPg9d1FsWeybZZP9WGAGb+q8l7/ANZ1V0FBNM1PauhV5srUO9ofLQpu7mK0tpbmU0jiaXO7uHevl1xPJc3EtxJ55nF7u1xXe5r31t9L8jaurbRGsjxlI8dHU1edWGW0uFoj2Pbtu8dHksotk5dKhEWLjQLM7zJFiw4U6FkgCIiEhERAFW84qxY6AhDMFm04JpGKkADJCEoJRFAIKFiUREBlHI+N7ZI3Fj2mrXNNCD1FfSdgu5Lzabe4ldrlc0iR3S5pI4L5ovR8p77FZOdY3btMErtUTzkx5wIPUVpitFuOjOH3HA8mGaqbUc/GOZ7lFANRUZKV0HghERAF5fna+ngggtYZCwT6zKG4FzBTCvRUr0VzdQWkLp7h4jiYKucV843vdHbrfvuaFsTRohacwwcT1nNZ5bRWObO72/A75ldqaY+LnSeRoIiLnPeCwfnRZrAtJNUIZDM1Yqw04FWIQgiIhYIiIAigkDNShBAzPapUDMqUBi44KGHFHnGixBoUIb4lqIiFgiIgOrtfMm47bRgf69uP5MmNB+F2YX0OGVs0LJWGrZGhzT1EVXydei5c5m/89os72rrWv7uQYmOvCnwrXHeHDfA83f7Pvr6mKq71+pL+pfme5XO33dTtVg65a0PkLgyNjjQFx9wWV1ve2WtqLp87XRuFYwwhzn9TQF4Ped5uN3ufVkGiFmEMINQ0dJ6SVpe6S4anDs9pfLkTtWMdX5p4T8CncNzvtyk9S7lL6eVgwY3satVEXM3Op71a1qlWqVUuSCIo1CtEJJREQkgZKVAyUoQFFRWnFSqq41QNwWoiISYPOKyaagIiFVqwMypREJKjiUREKFjTUKURC5g840WTTUIiELVkoiIWIoFKIgCIiAKo4mqIhWxYDUVUoiEkDJSiIDFxoFgiIVtqWNNQiIhbkf/Z" alt="" style="box-shadow: 0 2px 6px 0 rgba(0,0,0,0.3);">
+    						</div>
+    						<div id="islogin" class="aui-me-content-item-title"  onClick="toLogin()">聚合影视欢迎你！</div>
+
+    					</div>
+    					<div class="aui-me-content-item-text">
+
+    						<a >
+    							<span><img src="../image/jilu_logo/iqiyi.png" alt="" style="width: 20px; height: 20px; display: block; border: none; margin: 0 auto;"></span>
+    							<span>爱奇艺</span>
+    						</a>
+    						<a>
+    							<span><img src="../image/jilu_logo/tengxun.png" alt="" style="width: 20px; height: 20px; display: block; border: none; margin: 0 auto;"></span>
+    							<span>腾讯</span>
+    						</a>
+    						<a>
+    							<span><img src="../image/jilu_logo/youku.png" alt="" style="width: 20px; height: 20px; display: block; border: none; margin: 0 auto;"></span>
+    							<span>优酷</span>
+    						</a>
+    						<a>
+    							<span><img src="../image/jilu_logo/mgtv.png" alt="" style="width: 20px; height: 20px; display: block; border: none; margin: 0 auto;"></span>
+    							<span>芒果</span>
+    						</a>
+    					</div>
+    				</div>
+    				<div class="aui-me-content-card">
+    					<h3><i class="aui-icon aui-card-me" id="time_ico"></i> </h3>
+    					<a  id="time"> - - - </a>
+    				</div>
+    			</div>
+    		</div>
+
+<!--    <section class="myui-bg-info" id="user-info">
+      <div class="user-box">
+        <div class="user-box-1" tapmode onClick="toLogin()">
+          <img src="../image/user_img.png">
+        </div>
+          <div id="islogin" class="user-box-2" style="font-size:1rem;color:#00;" onClick="toLogin()">
+              共享影视
+          </div>
+          <div id="time" class="user-box-2" style="font-size:0.75rem;color:#000;" onClick="toLogin()">
+
+          </div>
+
+        </div>
+    </section>
+-->
+    <div class="br"></div>
+    <section class="aui-content" style="background-color: #fff;">
+      <div class="br"></div>
+      <div>
+      <li style='width:25%;float: left;text-align: -webkit-center;border-right: 3px' onClick="openWin('open_vip_win')"><img src=../image/app/cz.png style='width: 30px;height: 30px;margin-top: 10px;' /><p style='color:#323232;margin-top: 10px;font-size: 12px;'>充值会员</p></li>
+      <li style='width:25%;float: left;text-align: -webkit-center;border-right: 3px' onClick="openWin('share_win')"><img src=../image/app/jf.png style='width: 30px;height: 30px;margin-top: 10px;' /><p style='color:#323232;margin-top: 10px;font-size: 12px;'>获取积分</p></li>
+      <li style='width:25%;float: left;text-align: -webkit-center;border-right: 3px' onClick="look_record()" ><img src=../image/app/jl.png style='width: 30px;height: 30px;margin-top: 10px;' /><p style='color:#323232;margin-top: 10px;font-size: 12px;'>观看记录</p></li>
+	  <li style='width:25%;float: left;text-align: -webkit-center;border-right: 3px' onClick="openWin('daili')"><img src=../image/app/dl.png style='width: 30px;height: 30px;margin-top: 10px;' /><p style='color:#323232;margin-top: 10px;font-size: 12px;'>代理登录</p></li>
+    <br /><br /><br />
+    </div>
+    <div class="br"></div>
+  </section>
+<div class="br"></div>
+    <section class="aui-content">
+        <ul class="aui-list aui-list-in" style="line-height:30px;">
+          <li class="aui-list-item" onClick="openWin('jifen_win')" >
+              <div class="aui-list-item-label-icon">
+                  <i><img src="../image/app/duihuan.png" width="25" height="20"/></i>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow" >
+                  <div style="font-size:0.75rem;color:#323232;">积分兑换</div>
+                  <div id="jifen" class="aui-list-item-right"></div>
+              </div>
+          </li>
+
+          <li class="aui-list-item" onClick="openWin('back_pwd')">
+              <div class="aui-list-item-label-icon">
+                  <i><img src="../image/app/mima.png" width="25" height="20"/></i>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div style="font-size:0.75rem;color:#323232;">修改密码</div>
+                  <div  class="aui-list-item-right"></div>
+              </div>
+          </li>
+
+<!--
+          <li class="aui-list-item" tapmode onClick="openWin('shezhi_win')">
+              <div class="aui-list-item-label-icon">
+                  <i><img src="../image/app/shezhi.png" width="25" height="20"/></i>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div style="font-size:0.75rem;color:#323232;">其他设置</div>
+                  <div class="aui-list-item-right"></div>
+              </div>
+          </li>
+
+-->
+
+
+  <!--        <li class="aui-list-item" tapmode onClick="openWin('shezhi_win')">
+              <div class="aui-list-item-label-icon">
+                  <i><img src="../image/app/tuiguang.png" width="25" height="20"/></i>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div style="font-size:0.75rem;color:#323232;">分享好友</div>
+                  <div class="aui-list-item-right"></div>
+              </div>
+          </li>
+-->
+          <li class="aui-list-item" tapmode onClick="openWin('shezhi_win')">
+              <div class="aui-list-item-label-icon">
+                  <i><img src="../image/app/help.png" width="25" height="20"/></i>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div style="font-size:0.75rem;color:#323232;">观看帮助</div>
+                  <div class="aui-list-item-right"></div>
+              </div>
+          </li>
+
+
+                    <li class="aui-list-item" tapmode onClick="openWin('shezhi_win')">
+                        <div class="aui-list-item-label-icon">
+                            <i><img src="../image/app/help.png" width="25" height="20"/></i>
+                        </div>
+                        <div class="aui-list-item-inner aui-list-item-arrow">
+                            <div style="font-size:0.75rem;color:#323232;">代理帮助</div>
+                            <div class="aui-list-item-right"></div>
+                        </div>
+                    </li>
+
+        </ul>
+
+      </div>
+    </section>
+
+
+<div class="br"></div>
+<section class="aui-content style="line-height:18px;"">
+</div>
+
+    <center><ul class="aui-list aui-list-in" style="line-height:30px;">
+
+
+      <li class="aui-list-item" tapmode onClick="cleaCache()">
+          <div class="aui-list-item-label-icon">
+              <i><img src="../image/app/qingli.png" width="25" height="20"/></i>
+          </div>
+          <div class="aui-list-item-inner aui-list-item-arrow">
+              <div style="font-size:0.75rem;color:#323232;">清理缓存</div>
+              <div id="cache" class="aui-list-item-right"></div>
+          </div>
+      </li>
+
+      <li class="aui-list-item" tapmode onClick="checkUpdate()">
+          <div class="aui-list-item-label-icon">
+              <i><img src="../image/app/shengji.png" width="25" height="20"/></i>
+          </div>
+          <div class="aui-list-item-inner aui-list-item-arrow">
+              <div style="font-size:0.75rem;color:#323232;">检测更新</div>
+              <div id="vsion" class="aui-list-item-right"></div>
+          </div>
+      </li>
+
+
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-label-icon" >
+                        <i><img src="../image/app/kefu.png" width="25" height="20"/></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div style="font-size:0.75rem;color:#323232;">联系客服</div>
+                        <div class="aui-list-item-right" class="user-bt" onClick="api.alert({title: '免责声明',msg: '本站所有视频均来自互联网，版权归原创者所有，如果侵犯了您的权益，请通知我们，我们将会在3个正常工作日内删除其侵权内容，谢谢合作。',  });"> 聚合影视  <span style="color:#7bbfea">免责声明</span> </div>
+                    </div>
+                </li>
+
+
+
+
+    </ul>
+
+    <div id="otbtn" class="aui-content-padded" tapmode onclick="exitLogin()">
+        <div class="aui-btn-tuichu aui-btn-block">退出</div>
+    </div>
+
+</section>
+
+<div class="br"></div>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript">
+    var api_url = localStorage.getItem('api_url');
+
+    apiready = function () {
+
+  //下拉刷新
+      api.setCustomRefreshHeaderInfo({
+          bgColor : '#f0f0f0',
+      }, function() {
+          //下拉刷新被触发，自动进入加载状态，使用 api.refreshHeaderLoadDone() 手动结束加载中状态
+          setTimeout(function(){
+      api.refreshHeaderLoadDone()
+          }, 3000);
+      });
+      //下拉刷新
+
+
+      api.parseTapmode();
+      var appVersion = api.appVersion;
+      var vsion = $api.byId('vsion');
+      vsion.innerHTML = 'v'+appVersion;
+
+      api.parseTapmode();
+      //计算缓存
+      getCache();
+
+      //监听重新获取客服联系方式广播
+      api.addEventListener({
+          name: 'newLoingdata'
+      }, function(ret, err) {
+        if (ret) {
+          getData();
+          location.reload();
+        }
+      });
+
+      getData();
+
+    }
+
+
+    //联系客服按钮
+    function kefu(){
+      if (localStorage.getItem('user_id')<1) {
+        api.alert({
+            title: '请先登录',
+            msg: '知道了',
+        });
+      }else {
+        var dialogBox = api.require('dialogBox');
+        dialogBox.alert({
+            texts: {
+                content: localStorage.getItem('url')+localStorage.getItem('user_weichat'),
+                leftBtnTitle: '知道了',
+                rightBtnTitle: '复制'
+            },
+            styles: {
+                bg: '#fff',
+                w: 300,
+                content: {
+                    color: '#000',
+                    size: 14
+                },
+                left: {
+                    marginB: 7,
+                    marginL: 20,
+                    w: 130,
+                    h: 35,
+                    corner: 2,
+                    bg: '#ff7600',
+                    color: '#fff',
+                    size: 14
+                },
+                right: {
+                    marginB: 7,
+                    marginL: 10,
+                    w: 130,
+                    h: 35,
+                    corner: 2,
+                    bg: '#ff7600',
+                    color: '#fff',
+                    size: 14
+                }
+            }
+        }, function(ret) {
+            if (ret.eventType == 'left') {
+                var dialogBox = api.require('dialogBox');
+                dialogBox.close({
+                    dialogName: 'alert'
+                });
+            }else if (ret.eventType == 'right') {
+              var clipBoard = api.require('clipBoard');
+              clipBoard.set({
+                  value: localStorage.getItem('user_weichat')
+              }, function(ret, err) {
+                  if (ret) {
+                    api.toast({
+                        msg: '已复制号码到剪切板',
+                        duration: 2000
+                    });
+                    var dialogBox = api.require('dialogBox');
+                    dialogBox.close({
+                        dialogName: 'alert'
+                    });
+                  } else {
+
+                  }
+              });
+            }
+        });
+      }
+    }
+
+
+    function openWin(name){
+      if (localStorage.getItem('user_id')<1) {
+        api.openWin({
+            name: 'login',
+            url: './login.html',
+        });
+        return;
+      }else {
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+
+        api.openWin({
+            name: ''+name+'',
+            url: ''+name+'.html',
+            bounces:false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false
+        });
+      }
+
+    }
+    //获取数据
+    function getData(){
+      var user_id = localStorage.getItem('user_id');
+      var user_name = localStorage.getItem('user_name');
+      var user_time = localStorage.getItem('user_time');
+      var s1 = formatDateTime(user_time);
+      var timestamp = Date.parse(new Date())/1000;
+      var time = $api.byId('time');
+      var islogin = $api.byId('islogin');
+      //alert(user_time);
+      if (user_time>timestamp) {
+      time_ico.innerHTML = '<i class="iconfont icon-huiyuan" style="font-size:0.7rem;color:#ff5722"></i> 全网通视频 VIP';
+        time.innerHTML = ' 将于 '+s1+' 到期';
+      }
+      if (user_time<timestamp) {
+      time_ico.innerHTML = '<i class="iconfont icon-huiyuan" style="font-size:0.7rem;color:#ff5722"></i> 已过期';
+        time.innerHTML = 'VIP已到期 请及时续费';
+      }
+      if(user_time == "-1") {
+      time_ico.innerHTML = '<i class="iconfont icon-huiyuan" style="font-size:0.7rem;color:#ff5722"></i> 全网通视频永久 VIP ';
+        time.innerHTML = ' 感谢支持！';
+      }
+      if (localStorage.getItem('user_id')<1) {
+        time_ico.innerHTML = '<i class="iconfont icon-huiyuan" style="font-size:0.7rem;color:#ff5722"></i> - - - ';
+        time.innerHTML = '请先登陆';
+      }
+      if (localStorage.getItem('user_name')>1) {
+        islogin.innerHTML = '账号：'+user_name;
+      }
+
+    }
+
+
+//未登录提示
+var timer = setInterval(function(){
+    doItPerSecond();
+},20000)
+
+function doItPerSecond() {
+
+
+  if (localStorage.getItem('user_id')<1) {
+
+    api.toast({
+        msg: '还没登陆 部分功能受限',
+        duration: 5000
+    });
+
+  }
+
+
+}
+
+
+
+    function formatDateTime(timeStamp) {
+        var date = new Date();
+        date.setTime(timeStamp * 1000);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d;
+    };
+
+
+    function toLogin(){
+
+//判断   如果user_id大于0 （已登录） 并且 VIP时间为永久时  弹出提示
+            if(localStorage.getItem('user_id')>0  && localStorage.getItem('user_time') == "-1"  ) {
+
+                        api.toast({
+                  msg: '永久VIP  无需升级 感谢支持！',
+                  duration: 2000
+              });
+
+            }else{
+
+
+//判断   如果user_id大于0 （已登录） 并且 VIP时间不等于永久时  跳转升级
+      if (localStorage.getItem('user_id')>0  && localStorage.getItem('user_time') !== "-1") {
+          api.openWin({
+              name: 'open_vip_win',
+              url: './open_vip_win.html',
+              delay: 300,
+          });
+
+          //判断   如果user_id小于0 （未登录） 跳转登录
+      }else {
+        api.openWin({
+            name: 'login',
+            url: './login.html',
+            delay: 300,
+        });
+      }
+
+    }
+
+
+    }
+
+
+
+
+// 如果已经登录 就跳转到VIP升级
+/*
+    function toVip(){
+
+        if (user_id>0 ) {
+          api.openWin({
+              name: 'open_vip_win',
+              url: './open_vip_win.html',
+              delay: 300,
+          });
+        }else {     //否则跳转到登录
+          api.openWin({
+              name: 'login',
+              url: './login.html',
+              delay: 300,
+          });
+
+        }
+
+    }
+
+*/
+
+
+    //退出登录
+    function exitLogin(){
+      api.sendEvent({
+        name: 'newLoingdata',
+        extra: {
+        }
+      });
+  /*
+     api.showProgress({
+          title: '稍后...',
+          text: '正在退出...',
+          modal: false
+      });
+      */
+      localStorage.setItem('user_id','');
+      localStorage.setItem('user_name','');
+      localStorage.setItem('user_time','');
+      api.toast({
+          msg: ' 已安全退出',
+          duration: 2000
+      });
+      api.openWin({
+      });
+
+    }
+
+
+
+//打开页面
+      function openWin(name){
+
+//如果判断没有登录 就提示  并跳转到登录页面
+        if (localStorage.getItem('user_id')<1) {
+
+          api.toast({
+    msg: '(ｷ｀ﾟДﾟ´)!!    你还没登陆！',
+    duration: 2000
+});
+
+
+           api.openWin({
+               name: 'login',
+               url: './login.html',
+               delay: 2000
+           });
+           return;
+         }
+//↑↑↑↑↑↑↑上面LEEi   新加
+
+            var delay = 0;
+            if(api.systemType != 'ios'){
+                delay = 300;
+            }
+            api.openWin({
+                name: ''+name+'',
+                url: ''+name+'.html',
+                bounces:false,
+                delay: delay,
+                slidBackEnabled:true,
+                vScrollBarEnabled:false
+            });
+        }
+
+//清楚缓存
+function cleaCache(){
+  api.clearCache(function() {
+      api.toast({
+          msg: '清除完成'
+      });
+      getCache();
+  });
+}
+//计算缓存
+function getCache(){
+  api.getCacheSize(function(ret) {
+      var size = ret.size/1024/1024;
+      var mb = size.toFixed(2)
+      var cache = $api.byId('cache');
+      cache.innerHTML = mb+'MB';
+
+  });
+}
+
+
+
+
+
+
+  //更新app  （在apicloud进行）
+
+  function checkUpdate() {
+var mam = api.require('mam');
+mam.checkUpdate(function(ret, err) {
+if (ret) {
+  var result = ret.result;
+  if (result.update == true && result.closed == false) {
+    //  var str = '新版本号:' + result.version + '\n更新内容:' + result.updateTip  //下载地址:' + ';发布时间:' + result.time; + result.source + '; 需要的可以加上去
+     var str = '发布时间:' + result.time + '\n更新内容:\n' + result.updateTip   //下载地址:' + ';发布时间:' + result.time; + result.source + '; 需要的可以加上去
+      api.confirm({
+          title : '已有新版本 V' + result.version,
+          msg : str,
+          buttons : ['更新', '取消']
+      }, function(ret, err) {
+          if (ret.buttonIndex == 1) {
+              if (api.systemType == "android") {
+                  api.download({
+                      url : result.source,
+                      report : true
+                  }, function(ret, err) {
+                      if (ret && 0 == ret.state) {/* 下载进度 */
+                          api.toast({
+                              msg : "正在更新应用" + ret.percent + "%",
+                              duration : 2000
+                          });
+                      }
+                      if (ret && 1 == ret.state) {/* 下载完成 */
+                          var savePath = ret.savePath;
+                          api.installApp({
+                              appUri : savePath
+                          });
+                      }
+                  });
+              }
+              if (api.systemType == "ios") {
+                  api.installApp({
+                      appUri : result.source
+                  });
+              }
+          }
+      });
+  } else {
+    /*
+      api.alert({
+          msg : "已是最新版，无需更新！"
+      });
+      */
+      api.toast({
+          msg : "(o゜▽゜)o☆[BINGO!] 你现在用的是最新版本！",
+          duration : 5000
+      });
+  }
+} else {
+  api.alert({
+      msg : err.msg
+  });
+}
+});
+}
+  function look_record(){
+	api.openWin({
+	    name: 'look_record',
+	    url: 'look_record.html'
+    });
+}
+
+</script>
+
+
+
+
+<script type="text/javascript">
+//下拉刷新
+    function fnRefreshHeaderLoading() {
+        api.refreshHeaderLoading();
+    };
+</script>
+
+
+
+
+
+
+</html>
